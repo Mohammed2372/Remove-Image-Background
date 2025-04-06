@@ -102,6 +102,3 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 - Uses the [rembg](https://github.com/danielgatis/rembg) library for background removal
 - Built with Python's tkinter for the graphical user interface
-
-## NOTE:
-- The first run may take longer as the AI model downloads necessary files (about 100MB).
