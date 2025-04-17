@@ -8,10 +8,12 @@ A user-friendly desktop application that removes backgrounds from images with ju
 ## ✨ Features
 
 - **Easy Image Loading**
+
   - Drag-and-drop interface (Windows)
   - File browser selection
 
 - **Powerful Processing**
+
   - Automatic background removal using AI (rembg library)
   - Side-by-side preview of original and processed images
 
@@ -29,6 +31,7 @@ A user-friendly desktop application that removes backgrounds from images with ju
 ### Installation
 
 1. Clone this repository or download the source code:
+
    ```bash
    git clone https://github.com/Mohammed2372/Remove-Image-Background.git
    cd Remove-Image-Background
@@ -36,8 +39,9 @@ A user-friendly desktop application that removes backgrounds from images with ju
 
 2. Install the required packages:
    ```bash
-   pip install rembg pillow onnxruntime
+   pip install -r requirements.txt
    ```
+   > **Important:** Always run this command before running the application to ensure all required dependencies are installed.
 
 ### Running the Application
 
@@ -47,13 +51,47 @@ python rembg_program.py
 
 > **Note:** The first run may take longer as the AI model downloads necessary files (approximately 100MB).
 
+## 📦 Distribution as Standalone Executable
+
+You can create a standalone executable to distribute to users who don't have Python installed:
+
+1. Make sure you have PyInstaller installed:
+
+   ```bash
+   pip install pyinstaller
+   ```
+
+2. Run the build script to create the executable:
+
+   ```bash
+   .\build_executable.bat
+   ```
+
+   This process may take several minutes.
+
+3. Package the executable for distribution:
+
+   ```bash
+   .\package_for_distribution.bat
+   ```
+
+4. The executable will be available in:
+
+   - `dist/BackgroundRemover.exe` - Raw executable
+   - `BackgroundRemover_Package/` - Folder with organized files
+   - `BackgroundRemover_YYYYMMDD.zip` - Zip file ready for distribution
+
+5. Users only need to extract the zip and run the .exe file - no Python installation required!
+
 ## 📖 Usage Guide
 
 1. **Load an image:**
+
    - Drag and drop an image file onto the application window, or
    - Click the drop area to browse for an image
 
 2. **Process the image:**
+
    - Click the "Remove Background" button
    - Wait for processing to complete (typically a few seconds)
 
@@ -63,22 +101,21 @@ python rembg_program.py
 
 ## 🖼️ Supported Image Formats
 
-| Input | Output |
-|-------|--------|
-| JPG   | PNG (with transparency) |
-| JPEG  |        |
-| PNG   |        |
-| BMP   |        |
+| Input Formats | Output Format           |
+| ------------- | ----------------------- |
+| JPG/JPEG      | PNG (with transparency) |
+| PNG           | PNG (with transparency) |
+| BMP           | PNG (with transparency) |
 
 ## ⚠️ Troubleshooting
 
 ### Common Issues
 
-| Issue | Solution |
-|-------|----------|
-| Drag-and-drop not working | Use the "Click to Browse" option instead |
-| Slow processing | Larger images require more processing time |
-| Installation errors | Ensure Python 3.8+ is properly installed |
+| Issue                     | Solution                                   |
+| ------------------------- | ------------------------------------------ |
+| Drag-and-drop not working | Use the "Click to Browse" option instead   |
+| Slow processing           | Larger images require more processing time |
+| Installation errors       | Ensure Python 3.8+ is properly installed   |
 
 ### Error Resolution
 
