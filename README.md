@@ -51,38 +51,6 @@ python rembg_program.py
 
 > **Note:** The first run may take longer as the AI model downloads necessary files (approximately 100MB).
 
-## 📦 Distribution as Standalone Executable
-
-You can create a standalone executable to distribute to users who don't have Python installed:
-
-1. Make sure you have PyInstaller installed:
-
-   ```bash
-   pip install pyinstaller
-   ```
-
-2. Run the build script to create the executable:
-
-   ```bash
-   .\build_executable.bat
-   ```
-
-   This process may take several minutes.
-
-3. Package the executable for distribution:
-
-   ```bash
-   .\package_for_distribution.bat
-   ```
-
-4. The executable will be available in:
-
-   - `dist/BackgroundRemover.exe` - Raw executable
-   - `BackgroundRemover_Package/` - Folder with organized files
-   - `BackgroundRemover_YYYYMMDD.zip` - Zip file ready for distribution
-
-5. Users only need to extract the zip and run the .exe file - no Python installation required!
-
 ## 📖 Usage Guide
 
 1. **Load an image:**

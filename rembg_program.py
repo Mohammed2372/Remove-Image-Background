@@ -17,24 +17,43 @@ class BackgroundRemoverApp:
         # Configure styles
         self.style = ttk.Style()
         self.style.configure('TFrame', background='#f0f0f0')
-        self.style.configure('TButton', padding=5, relief="flat", background="#4CAF50", foreground="white")
+        
+        # Configure button styles with black text
+        self.style.configure('TButton', padding=5, relief="flat", background="#4CAF50", foreground="black")
         self.style.map('TButton', background=[('active', '#45a049')])
+        
+        # Create a specific style for the Clear button
+        self.style.configure('Clear.TButton', background="#f44336", foreground="black")
+        self.style.map('Clear.TButton', background=[('active', '#d32f2f')])
         
         # Create main frame
         self.main_frame = ttk.Frame(root)
         self.main_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
         
-        # Drop area
+        # Drop area with improved styling
+        self.drop_frame = ttk.Frame(self.main_frame, style='TFrame')
+        self.drop_frame.pack(fill=tk.BOTH, expand=True, pady=(0, 10))
+        
         self.drop_area = tk.Label(
-            self.main_frame, 
+            self.drop_frame, 
             text="Drag & Drop Image Here\nor Click to Browse", 
-            bg='white', fg='gray', 
-            relief=tk.RAISED, bd=2,
-            font=('Helvetica', 14), 
+            bg='#f5f5f5', fg='#555555', 
+            relief=tk.GROOVE, bd=2,
+            font=('Helvetica', 14, 'bold'), 
             padx=20, pady=40
         )
-        self.drop_area.pack(fill=tk.BOTH, expand=True, pady=(0, 10))
+        self.drop_area.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
         self.drop_area.bind("<Button-1>", self.browse_image)
+        
+        # Add some visual cues
+        self.drop_icon = tk.Label(
+            self.drop_area,
+            text="📷",
+            font=('Helvetica', 32),
+            bg='#f5f5f5',
+            fg='#4CAF50'
+        )
+        self.drop_icon.place(relx=0.5, rely=0.3, anchor=tk.CENTER)
         
         # Enable drag-and-drop
         self.setup_drag_and_drop()
@@ -61,7 +80,8 @@ class BackgroundRemoverApp:
                                   command=self.save_result, state=tk.DISABLED)
         self.save_btn.pack(side=tk.LEFT, padx=5)
         
-        self.clear_btn = ttk.Button(self.button_frame, text="Clear", command=self.clear_all)
+        # Use the Clear style for the clear button
+        self.clear_btn = ttk.Button(self.button_frame, text="Clear", command=self.clear_all, style='Clear.TButton')
         self.clear_btn.pack(side=tk.RIGHT, padx=5)
         
         # Initialize variables
@@ -102,15 +122,18 @@ class BackgroundRemoverApp:
             self.process_image(filename)
     
     def on_drag_enter(self, event):
-        self.drop_area.config(bg='#e1f5fe', fg='black')
+        self.drop_area.config(bg='#e1f5fe', fg='#0277bd')
+        self.drop_icon.config(bg='#e1f5fe', fg='#0277bd')
         return event.action
     
     def on_drag_leave(self, event):
-        self.drop_area.config(bg='white', fg='gray')
+        self.drop_area.config(bg='#f5f5f5', fg='#555555')
+        self.drop_icon.config(bg='#f5f5f5', fg='#4CAF50')
         return event.action
     
     def on_drop(self, event):
-        self.drop_area.config(bg='white', fg='gray')
+        self.drop_area.config(bg='#f5f5f5', fg='#555555')
+        self.drop_icon.config(bg='#f5f5f5', fg='#4CAF50')
         
         # Get the dropped file path
         file_path = event.data
@@ -241,7 +264,9 @@ class BackgroundRemoverApp:
         self.remove_bg_btn.config(state=tk.DISABLED)
         self.save_btn.config(state=tk.DISABLED)
         
-        self.drop_area.config(text="Drag & Drop Image Here\nor Click to Browse", bg='white', fg='gray')
+        self.drop_area.config(text="Drag & Drop Image Here\nor Click to Browse", bg='#f5f5f5', fg='#555555')
+        self.drop_icon.place(relx=0.5, rely=0.3, anchor=tk.CENTER)
+        self.drop_icon.config(bg='#f5f5f5', fg='#4CAF50')
 
 def main():
     root = tk.Tk()
